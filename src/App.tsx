@@ -32,7 +32,6 @@ function App() {
     let options = {
       method: 'GET',
       url: 'https://papi-pornstarsapi.p.rapidapi.com/pornstars/',
-      params: { name: name ? name : null },
       headers: {
         'X-RapidAPI-Key': '2d04c8fe7dmsha351e7b3080b61cp1a8af9jsncefbf38edcd1',
         'X-RapidAPI-Host': 'papi-pornstarsapi.p.rapidapi.com'
