@@ -30,11 +30,12 @@ function App() {
         raw_measurement:"33A-25-34",
         bust:33,
         waist:25,
-        pornpics_link:''
+        pornpics_link:'https://www.pornpics.com/pornstars/aaliyah-love/',
+        freones_link:'/aaliyah-love/bio',
         images: [
           {
-            image: 'https://m.media-amazon.com/images/M/MV5BMzc1YTA1ZjItMWRhMy00ZTBlLTkzNTgtNTc4ZDE3YTM3ZDk2XkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_UY1200_CR285,0,630,1200_AL_.jpg',
-            image_link: 'https://m.media-amazon.com/images/M/MV5BMzc1YTA1ZjItMWRhMy00ZTBlLTkzNTgtNTc4ZDE3YTM3ZDk2XkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_UY1200_CR285,0,630,1200_AL_.jpg',
+            image: 'https://cdni.pornpics.com/460/7/89/74808621/74808621_004_b5ec.jpg',
+            image_link: 'https://api.papi.rest/media/74808621_004_b5ec.jpg',
             is_profile_pic: false
           }
         ]
