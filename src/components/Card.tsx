@@ -1,18 +1,51 @@
+import axios from 'axios';
+import { useState } from 'react';
 import { Responce } from '../Model/Models'
 
-
-
-const Card = (props: { res: Responce }) => {
+const Card = (props: { res: Responce, setRes: React.Dispatch<React.SetStateAction<Responce>> }) => {
+    const [pagnumber, setPagnumber] = useState(1)
+    const pagination = () => {
+        if (props.res.next) {
+            let options = {
+                method: 'GET',
+                url: props.res.next,
+                headers: {
+                    'X-RapidAPI-Key': '2d04c8fe7dmsha351e7b3080b61cp1a8af9jsncefbf38edcd1',
+                    'X-RapidAPI-Host': 'papi-pornstarsapi.p.rapidapi.com'
+                }
+            };
+            axios.request(options).then(function (response) {
+                props.setRes(response.data);
+            }).catch(function (error) {
+                console.error(error);
+            });
+        }
+        if (props.res.previous) {
+            let options = {
+                method: 'GET',
+                url: props.res.previous,
+                headers: {
+                    'X-RapidAPI-Key': '2d04c8fe7dmsha351e7b3080b61cp1a8af9jsncefbf38edcd1',
+                    'X-RapidAPI-Host': 'papi-pornstarsapi.p.rapidapi.com'
+                }
+            };
+            axios.request(options).then(function (response) {
+                props.setRes(response.data);
+            }).catch(function (error) {
+                console.error(error);
+            });
+        }
+    };
 
     const data = props.res.results;
     return (
-        <div className="w-full p-6">
+        <div className="w-full p-6 dark:bg-gray-900">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 px-auto">
                 {
                     data.map(item => {
                         return (
                             <div
-                                className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                className="max-w-sm mx-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                                 <a href="/">
                                     <img src={item.images[0].image} className="rounded-t-lg" alt="actress-img" />
                                 </a>
@@ -31,6 +64,34 @@ const Card = (props: { res: Responce }) => {
                     })
                 }
             </div>
+            {/* Pagination */}
+            <nav aria-label="Page navigation example">
+                <ul className="inline-flex items-center -space-x-px">
+                    {
+                        props.res.previous ?
+                            <li>
+                                <button onClick={() => { pagination(); setPagnumber(pagnumber - 1) }} className="block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                    <span className="sr-only">Previous</span>
+                                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
+                                </button>
+                            </li>
+                            : null
+                    }
+                    <li>
+                        <button aria-current="page" className="z-10 py-2 px-3 leading-tight text-blue-600 bg-blue-50 border border-blue-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">{pagnumber}</button>
+                    </li>
+                    {
+                        props.res.next ?
+                            <li>
+                                <button onClick={() => { pagination(); setPagnumber(pagnumber + 1) }} className="block py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                    <span className="sr-only">Next</span>
+                                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
+                                </button>
+                            </li> : null
+                    }
+                </ul>
+            </nav>
+
         </div>
     )
 }
