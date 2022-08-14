@@ -7,7 +7,7 @@ const Card = (props: { res: Responce }) => {
     const data = props.res.results;
     return (
         <div className="w-full p-6">
-            <div className="grid sm:grid-cols-1 grid-cols-4 gap-3 px-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 px-auto">
                 {
                     data.map(item => {
                         return (
